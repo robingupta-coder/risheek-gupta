@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Explainer for Students</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Concept Explainer</h1>
+                <p>Your personal AI tutor for CBSE & IGCSE curriculum.</p>
+            </div>
+            <button id="view-favorites-button" class="icon-button" aria-label="View Saved Topics">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M5 21V3h14v18l-7-3-7 3Zm2-2.5 5-2.15 5 2.15V5H7v13.5Z"/>
+                </svg>
+                <span>View Saved</span>
+            </button>
+        </header>
+
+        <main>
+            <form id="prompt-form" aria-labelledby="form-heading">
+                <div class="form-group">
+                    <label for="topic-input">Enter a topic you want to understand</label>
+                    <input type="text" id="topic-input" placeholder="e.g., Photosynthesis, Pythagorean theorem" required aria-required="true">
+                </div>
+
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="grade-select">Grade</label>
+                        <select id="grade-select">
+                            <option value="8th">8th</option>
+                            <option value="9th">9th</option>
+                            <option value="10th" selected>10th</option>
+                            <option value="11th">11th</option>
+                            <option value="12th">12th</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="board-select">Board</label>
+                        <select id="board-select">
+                            <option value="CBSE">CBSE</option>
+                            <option value="IGCSE">IGCSE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-button">
+                    <span class="button-text">Explain & Animate</span>
+                </button>
+            </form>
+
+            <section id="output-container" aria-live="polite">
+                 <div class="loader-container" id="loader" style="display: none;">
+                    <div class="loader"></div>
+                    <p>Working on it...</p>
+                </div>
+                <div id="actions-container"></div>
+                <div id="result-wrapper">
+                    <div id="media-result" class="result-column">
+                        <!-- Media (video) will be dynamically inserted here -->
+                    </div>
+                    <div id="text-column" class="result-column">
+                        <div id="text-result"></div>
+                        <div id="visual-aids-container"></div>
+                    </div>
+                </div>
+                 <p id="error-message" class="error-message" style="display: none;"></p>
+            </section>
+        </main>
+    </div>
+
+    <div id="favorites-modal" class="modal" hidden>
+        <div class="modal-overlay"></div>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="favorites-heading">
+            <div class="modal-header">
+                <h2 id="favorites-heading">Saved Topics</h2>
+                <button id="close-modal-button" class="icon-button" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="m12 13.4-4.9 4.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7L10.6 12 5.7 7.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275L12 10.6l4.9-4.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275Z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="tag-filters"></div>
+                <div id="favorites-list">
+                    <!-- Favorites will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/genai": "https://esm.sh/@google/genai@^0.14.0",
+                "marked": "https://esm.sh/marked@13.0.0"
+            }
+        }
+    </script>
+    <script type="module" src="index.tsx"></script>
+</body>
+</html>
